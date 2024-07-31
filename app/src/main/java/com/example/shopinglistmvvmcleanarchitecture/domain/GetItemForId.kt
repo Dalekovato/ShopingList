@@ -1,9 +1,11 @@
 package com.example.shopinglistmvvmcleanarchitecture.domain
 
-class GetItemForId {
+class GetItemForId (private val shopListRepository: ShopListRepository){
 
     fun getItemForId(shopItemId: Int) : ShopItem{
 
-        TODO()
+        return shopListRepository.getItemForId(shopItemId)
+
     }
+
 }
