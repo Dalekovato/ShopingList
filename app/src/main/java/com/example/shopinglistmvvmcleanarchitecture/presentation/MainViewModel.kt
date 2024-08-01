@@ -1,6 +1,6 @@
 package com.example.shopinglistmvvmcleanarchitecture.presentation
 
-import androidx.lifecycle.MutableLiveData
+
 import androidx.lifecycle.ViewModel
 import com.example.shopinglistmvvmcleanarchitecture.data.ShopListRepositoryImpl
 import com.example.shopinglistmvvmcleanarchitecture.domain.DellItemUseCase
@@ -28,6 +28,7 @@ class MainViewModel : ViewModel() {
         val newItem = shopItem.copy(enabled = !shopItem.enabled)
         editItemUseCase.editItem(newItem)
     }
+
 
 
 }
