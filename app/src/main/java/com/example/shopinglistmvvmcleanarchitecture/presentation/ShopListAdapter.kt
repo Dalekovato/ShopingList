@@ -1,30 +1,16 @@
 package com.example.shopinglistmvvmcleanarchitecture.presentation
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ListAdapter
 import com.example.shopinglistmvvmcleanarchitecture.R
 import com.example.shopinglistmvvmcleanarchitecture.domain.ShopItem
 
-class ShopListAdapter: RecyclerView.Adapter<ShopListAdapter.ShopItemViewHolder>() {
-
-    var shopList = listOf<ShopItem>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+class ShopListAdapter() : ListAdapter<ShopItem,ShopItemViewHolder>(ShopItemDiffCallback()){
 
     var onShopItemLongClickListner: ((ShopItem)-> Unit)? = null
     var onShopItemClickListner: ((ShopItem)-> Unit)? = null
 
-    class ShopItemViewHolder(val view:View ): RecyclerView.ViewHolder(view){
-        val tvName = view.findViewById<TextView>(R.id.tv_name)
-        val tvCount = view.findViewById<TextView>(R.id.tv_count)
-
-
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopItemViewHolder {
 
@@ -39,10 +25,8 @@ class ShopListAdapter: RecyclerView.Adapter<ShopListAdapter.ShopItemViewHolder>(
 
     }
 
-
-
     override fun onBindViewHolder(holder: ShopItemViewHolder, position: Int) {
-        val shopItem = shopList[position]
+        val shopItem = getItem(position)
 
         holder.view.setOnLongClickListener {
             onShopItemLongClickListner?.invoke(shopItem)
@@ -54,28 +38,22 @@ class ShopListAdapter: RecyclerView.Adapter<ShopListAdapter.ShopItemViewHolder>(
             true
         }
 
-
         holder.tvName.text = shopItem.name
         holder.tvCount.text = shopItem.count.toString()
 
     }
 
     override fun getItemViewType(position: Int): Int {
-        val item = shopList[position]
+
+        val item = getItem(position)
+
         return if(item.enabled){
             VIEV_TYPE_ENABLED
         }else{
             VIEV_TYPE_DISALED
         }
 
-
     }
-
-
-    override fun getItemCount(): Int {
-        return shopList.size
-    }
-
 
     companion object{
         const val VIEV_TYPE_ENABLED = 100
