@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Shoping List (MVVM)Clean Architecture</string>
     <string name="add_new_shop_item">Add new shop item</string>
+    <string name="save">Save\n</string>
+    <string name="count">Count:</string>
+    <string name="Name">Name\n\n</string>
+    <string name="error_imput_count">Error\n</string>
 </resources>

@@ -2,6 +2,7 @@ package com.example.shopinglistmvvmcleanarchitecture.presentation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.example.shopinglistmvvmcleanarchitecture.R
 import com.example.shopinglistmvvmcleanarchitecture.domain.ShopItem
@@ -11,6 +12,14 @@ class ShopListAdapter() : ListAdapter<ShopItem,ShopItemViewHolder>(ShopItemDiffC
     var onShopItemLongClickListner: ((ShopItem)-> Unit)? = null
     var onShopItemClickListner: ((ShopItem)-> Unit)? = null
 
+//    var shopList = listOf<ShopItem>()  Старый вариант обновления списка
+//        set(value) {
+//            val callback = ShopListDiffCallBack(shopList, value)
+//            val diffResult = DiffUtil.calculateDiff(callback)
+//            diffResult.dispatchUpdatesTo(this)
+//            field = value
+//
+//        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopItemViewHolder {
 

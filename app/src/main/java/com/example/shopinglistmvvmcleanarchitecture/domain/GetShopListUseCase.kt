@@ -10,4 +10,6 @@ class GetShopListUseCase (private val shopListRepository: ShopListRepository) {
 
     }
 
+
+
 }
