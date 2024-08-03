@@ -1,7 +1,6 @@
 package com.example.shopinglistmvvmcleanarchitecture.presentation
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -10,13 +9,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shopinglistmvvmcleanarchitecture.R
-import com.example.shopinglistmvvmcleanarchitecture.domain.ShopItem
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
     private lateinit var shopListAdapter: ShopListAdapter
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,14 +28,19 @@ class MainActivity : AppCompatActivity() {
         }
         setupRecyclerView()
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        viewModel.shopList.observe(this){
+        viewModel.shopList.observe(this) {
             shopListAdapter.submitList(it)
+        }
+
+        val buttonAddItem = findViewById<FloatingActionButton>(R.id.button_add_shop_item)
+        buttonAddItem.setOnClickListener {
+            val intent = ShopItemActiviry.newIntentAddItem(this)
+            startActivity(intent)
         }
 
     }
 
-
-    private fun setupRecyclerView(){
+    private fun setupRecyclerView() {
 
         val rvShopList = findViewById<RecyclerView>(R.id.rv_shop_list)
         with(rvShopList) {
@@ -81,8 +84,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupClickListner() {
         shopListAdapter.onShopItemClickListner = {
-
-            Log.d("ProverkaNahui", "Informk: ${ShopItem}")
+            val intent = ShopItemActiviry.newIntentEditItem(this, it.id)
+            startActivity(intent)
         }
     }
 
@@ -91,6 +94,5 @@ class MainActivity : AppCompatActivity() {
             viewModel.editItem(it)
         }
     }
-
 
 }
